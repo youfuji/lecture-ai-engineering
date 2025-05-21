@@ -171,3 +171,9 @@ def test_model_reproducibility(sample_data, preprocessor):
     assert np.array_equal(
         predictions1, predictions2
     ), "モデルの予測結果に再現性がありません"
+
+# 推論結果の検証を追加
+def test_model_prediction_values(train_model):
+    model, X_test, _ = train_model
+    y_pred = model.predict(X_test)
+    assert set(np.unique(y_pred)).issubset({0, 1}), "予測値に不正な値が含まれています"
